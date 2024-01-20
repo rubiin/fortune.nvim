@@ -1,0 +1,22 @@
+[*]
+indent_style = space
+indent_size = 4
+tab_width = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+
+[*.lua]
+align_continuous_assign_statement = false
+space_around_table_field_list = false
+align_call_args = false
+quote_style = single
+
+[*.json,*.jsonc]
+indent_style = tab
+
+[*.js]
+indent_style = tab
+
+[{Makefile,**.mk}]
+indent_style = tab
