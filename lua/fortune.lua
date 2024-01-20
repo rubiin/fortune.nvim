@@ -2,6 +2,8 @@
 
 local list_extend = vim.list_extend
 
+local M = {}
+
 --- @param line string
 --- @param max_width number
 --- @return table
@@ -52,12 +54,15 @@ local format_fortune = function(fortune, max_width)
   return formatted_fortune
 end
 
-local get_fortune = function(fortune_list)
-  -- selects an entry from fortune_list randomly
+-- selects an entry from fortune_list randomly
+local random_fortune = function(fortune_list)
   math.randomseed(os.time())
   local ind = math.random(1, #fortune_list)
   return fortune_list[ind]
 end
+
+
+-- TODO: add a setup function
 
 -- Credit to @mhinz for compiling this list in vim-startify
 local fortune_list = {
@@ -880,25 +885,31 @@ local fortune_list = {
   { 'What one programmer can do in one month, two programmers can do in two months.', '', '- Frederick P. Brooks' },
 }
 
---- @return table
+
+
+local options = {
+  max_width = 60,
+  fortune_list = fortune_list,
+}
+
+
 --- @param opts number|table? optional
---- returns an array of strings
-local main = function(opts)
-  local options = {
-    max_width = 60,
-    fortune_list = fortune_list,
-  }
+M.setup = function(opts)
 
   if type(opts) == 'number' then
     options.max_width = opts
   elseif type(opts) == 'table' then
     options = vim.tbl_extend('force', options, opts)
   end
+end
 
-  local fortune = get_fortune(options.fortune_list)
+
+--- @return table
+M.get_fortune = function()
+  local fortune = random_fortune(options.fortune_list)
   local formatted_fortune = format_fortune(fortune, options.max_width)
 
   return formatted_fortune
 end
 
-return main
+return M
