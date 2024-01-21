@@ -7,7 +7,7 @@ local M = {}
 --- @param line string
 --- @param max_width number
 --- @return table
-local format_line = function(line, max_width)
+M.format_line = function(line, max_width)
   if line == '' then return { ' ' } end
 
   local formatted_line = {}
@@ -44,11 +44,11 @@ end
 --- @param fortune table
 --- @param max_width number
 --- @return table
-local format_fortune = function(fortune, max_width)
+M.format_fortune = function(fortune, max_width)
   -- Converts list of strings to one formatted string (with linebreaks)
-  local formatted_fortune = { ' ' } -- adds spacing between alpha-menu and footer
+  local formatted_fortune = { ' ' } -- adds spacing between menu and footer
   for _, line in ipairs(fortune) do
-    local formatted_line = format_line(line, max_width)
+    local formatted_line = M.format_line(line, max_width)
     formatted_fortune = list_extend(formatted_fortune, formatted_line)
   end
   return formatted_fortune
@@ -62,10 +62,7 @@ local random_fortune = function(fortune_list)
 end
 
 
--- TODO: add a setup function
-
--- Credit to @mhinz for compiling this list in vim-startify
-local fortune_list = {
+M.fortune_list = {
   { "If you don't finish then you're just busy, not productive.", '', '- Anonymous' },
   {
     'Adapting old programs to fit new machines usually means adapting new machines to behave like old ones.',
@@ -889,7 +886,7 @@ local fortune_list = {
 
 local options = {
   max_width = 60,
-  fortune_list = fortune_list,
+  fortune_list = M.fortune_list,
 }
 
 
@@ -907,7 +904,7 @@ end
 --- @return table
 M.get_fortune = function()
   local fortune = random_fortune(options.fortune_list)
-  local formatted_fortune = format_fortune(fortune, options.max_width)
+  local formatted_fortune = M.format_fortune(fortune, options.max_width)
 
   return formatted_fortune
 end

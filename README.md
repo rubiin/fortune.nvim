@@ -1,5 +1,5 @@
 A fortune plugin for neovim
-Useful for dashboard plugins like mini.starter and dashbiard.nvim
+Useful for dashboard plugins like mini.starter and dashboard.nvim
 
 ## Installation
 
@@ -36,13 +36,11 @@ Plug 'rubiin/fortune.nvim', {'tag' : '*'}
 ## Usage
 The plugin returns a lua table
 ```lua
+         -- dashboard.nvim reference
           footer = function()
-            local stats = require('lazy').stats()
-            local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-            local fortune = require('fortune').get_fortune()
             local info = {}
-            info[1] = '⚡ Neovim loaded ' .. stats.loaded .. '/' .. stats.count .. ' plugins in ' .. ms .. 'ms'
-            info[2] = ''
+            local fortune = require('fortune').get_fortune()
+            info[1] = '  Neovim loaded ' .. vim.fn.strftime('%H:%M') .. ' on ' .. vim.fn.strftime('%d/%m/%Y') .. ' '
             local footer = vim.list_extend(info, fortune)
             return footer
           end,
