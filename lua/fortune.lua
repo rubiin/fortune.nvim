@@ -240,14 +240,14 @@ M.fortune_list = {
       "",
       "- William Laeder",
     },
-    { "Computers are fast; developers keep them slow.", "", "- Anonymous" },
-    { "Don't comment bad code – rewrite it.", "", "- Brian Kernighan" },
+    { "Computers are fast; developers keep them slow.", "", "- Peter Coffee" },
+    { "Don't comment bad code - rewrite it.", "", "- Brian Kernighan" },
     { "First, solve the problem. Then.", "", "John Johnson" },
     { "The computer was born to solve problems that did not exist before.", "", "- Bill Gates" },
     { "Make it work, make it right, make it fast.", "", "Kent Beck" },
 
     { "Easy things should be easy and hard things should be possible.", "", "- Larry Wall" },
-    { "Nothing is more permanent than a temporary solution.", "", "- Anonymous" },
+    { "Nothing is more permanent than a temporary solution.", "", "- Fyodor Dostoevsky" },
     {
       "All programming is an exercise in caching.",
       "",
@@ -266,7 +266,7 @@ M.fortune_list = {
     {
       "640K ought to be enough for anybody.",
       "",
-      "- Bill Gates, 1981",
+      "- Bill Gates",
     },
     {
       "To understand recursion, one must first understand recursion.",
@@ -279,7 +279,7 @@ M.fortune_list = {
     { "Code never lies, comments sometimes do.", "", "— Ron Jeffries" },
     { "Laziness is a programmer's main virtue.", "", "— Larry Wall" },
     { "If, at first, you do not succeed, call it version 1.0.", "", "— Khayri R.R. Woulfe" },
-    { "When I wrote this code, only God and I understood what I did. Now only God knows.", "", "— Anonymous" },
+    { "When I wrote this code, only God and I understood what I did. Now only God knows.", "", "— Martin Fowler" },
     { "What one programmer can do in one month, two programmers can do in two months.", "", "— Fred Brooks" },
     { "Truth can only be found in one place: the code.", "", "- Robert C. Martin" },
     {
@@ -295,7 +295,8 @@ M.fortune_list = {
     },
     { "A LISP programmer knows the value of everything, but the cost of nothing.", "", "- Alan J. Perlis" },
     { "Think twice, code once.", "", "- Anonymous" },
-    { "No matter how far down the wrong road you have gone, turn back now.", "", "- Anonymous" },
+    { "The sooner you start to code, the longer the program will take.", "", "- Roy Carlson" },
+    { "No matter how far down the wrong road you have gone, turn back now.", "", "-  Turkish Proverbial Wisdom" },
     { "Why do we never have time to do it right, but always have time to do it over?", "", "- Anonymous" },
     { "Weeks of programming can save you hours of planning.", "", "- Anonymous" },
     { "To iterate is human, to recurse divine.", "", "- L. Peter Deutsch" },
@@ -325,12 +326,14 @@ M.fortune_list = {
       "",
       "- Alan Kay",
     },
-    { "Invest regularly in your knowledge portfolio. Make learning a habit.", "", "- Anonymous" },
+    { "Invest regularly in your knowledge portfolio. Make learning a habit.", "", "- Thomas C. Corley" },
     { "It is easier to change the specification to fit the program than vice versa.", "", "- Alan Perlis" },
     { "Simplicity does not precede complexity, but follows it.", "", "- Alan Perlis" },
     { "Optimization hinders evolution.", "", "- Alan Perlis" },
     { "recursion is the root of computation since it trades description for time.", "", "- Alan Perlis" },
     { "Experience is the name everyone gives to their mistakes.", "", "- Oscar Wilde" },
+    { "People who are really serious about software should make their own hardware.", "", "- Alan Kay" },
+    { "Software is eating the world, but AI is going to eat software.", "", "- Jensen Huang" },
     { "People don't care about what you say, they care about what you build.", "", "- Mark Zuckerberg" },
     {
       "Coding ain't done til all the Tests run.",
@@ -425,7 +428,7 @@ M.fortune_list = {
     {
       "Code as if the next person to maintain your code is a homicidal maniac who knows where you live.",
       "",
-      "- Anonymous",
+      "- John Woods",
     },
 
     {
