@@ -56,3 +56,6 @@ The plugin returns a lua table
      display_format = 'short' | 'long'  -- the fortune form
      content_type = 'quotes' | 'tips'
 ```
+
+## Screenshots
+![1](https://i.imgur.com/f8CvAso.png)
