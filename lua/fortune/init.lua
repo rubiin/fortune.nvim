@@ -4,8 +4,6 @@ local list_extend = vim.list_extend
 
 local M = {}
 
-M.fortune_list = require("quotes")
-
 --- @param line string
 --- @param max_width number
 --- @return table
@@ -69,13 +67,18 @@ local random_fortune = function(fortune_list)
   return fortune_list[ind]
 end
 
-
 local options = {
   max_width = 60,
-  form = 'short',
+  display_format = 'short', -- Renamed from 'form'
+  content_type = 'quotes', -- Renamed from 'type', also assuming there are only two options: 'quotes' and 'tips'
 }
 
---- @param opts number|table? optional
+--- Sets up the options for the module.
+--- @param opts table|nil Optional table containing configuration options.
+--- max_width (number): The maximum width for content display.
+--- display_format (string): The format for displaying content. Can be 'short'.
+--- content_type (string): The type of content to display. Can be 'quotes' or 'tips'.
+--- @return nil
 M.setup = function(opts)
   if opts ~= nil then
     options = vim.tbl_extend('force', options, opts)
@@ -84,7 +87,8 @@ end
 
 --- @return table
 M.get_fortune = function()
-  local fortune = random_fortune(M.fortune_list[options.form])
+  local all_list = options.content_type == 'quotes' and require('fortune.quotes') or require('fortune.tips')
+  local fortune = random_fortune(all_list[options.display_format])
   local formatted_fortune = M.format_fortune(fortune, options.max_width)
 
   return formatted_fortune
