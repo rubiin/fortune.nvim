@@ -50,5 +50,6 @@ The plugin returns a lua table
 ## Configuration
 ```lua
      max_width = 60, -- max width the fortune section should take place
-     form = 'short' | 'long'  -- the fortune form
+     display_format = 'short' | 'long'  -- the fortune form
+     content_type = 'quotes' | 'tips'
 ```
