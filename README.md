@@ -1,3 +1,6 @@
+
+<img src="https://i.imgur.com/rSaIQPp.png" height=150 />
+
 A fortune plugin for neovim
 Useful for dashboard plugins like mini.starter and dashboard.nvim
 
