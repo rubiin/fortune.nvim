@@ -62,4 +62,9 @@ The plugin returns a lua table
 ```
 
 ## Screenshots
+### Tips
 ![1](https://i.imgur.com/f8CvAso.png)
+
+
+### Quote
+![2](https://i.imgur.com/Zi0Gr2n.png)
