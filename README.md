@@ -2,8 +2,12 @@
 <img src="https://i.imgur.com/rSaIQPp.png" height=150 />
 
 A fortune plugin for neovim
-Useful for dashboard plugins like mini.starter and dashboard.nvim
 
+## Description
+Useful for dashboard plugins like mini.starter and dashboard.nvim
+This plugin designed to inject a dose of inspiration, wisdom, or humor into your editing workflow. It delivers random quotes, proverbs, or jokes directly to your Neovim dashboard. Additionally, it offers helpful tips and tricks to improve your productivity and efficiency within the editor.
+
+Check out the README for more details
 ## Installation
 
 Using [packer](https://github.com/wbthomason/packer.nvim) in lua
