@@ -63,8 +63,10 @@ The plugin returns a lua table
 
 ## Screenshots
 ### Tips
+When `content_type='tips'`, it shows some useful tips and tricks like neovim shortcuts which can be very useful.
 ![1](https://i.imgur.com/f8CvAso.png)
 
 
 ### Quote
+When `content_type='quotes'`, it shows programming quotes that are both funny and educational.
 ![2](https://i.imgur.com/Zi0Gr2n.png)
