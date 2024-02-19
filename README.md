@@ -1,6 +1,4 @@
-<img src="https://i.imgur.com/rSaIQPp.png" height=150 />
-
-A fortune plugin for neovim
+<p align="center"><img src="https://i.imgur.com/rSaIQPp.png" height=150 /></p>
 
 ## Description
 
