@@ -69,8 +69,8 @@ end
 
 local options = {
   max_width = 60,
-  display_format = 'short', -- Renamed from 'form'
-  content_type = 'quotes', -- Renamed from 'type', also assuming there are only two options: 'quotes' and 'tips'
+  display_format = 'short', -- 'short', 'long', ',mixed'
+  content_type = 'quotes', -- 'quotes' and 'tips'
 }
 
 --- Sets up the options for the module.
@@ -88,7 +88,14 @@ end
 --- @return table
 M.get_fortune = function()
   local all_list = options.content_type == 'quotes' and require('fortune.quotes') or require('fortune.tips')
-  local fortune = random_fortune(all_list[options.display_format])
+  local content
+  if options.display_format == 'mixed' then
+    content = vim.tbl_extend('force', {}, all_list['short'], all_list['long'])
+  else
+    content = all_list[options.display_format]
+  end
+
+  local fortune = random_fortune(content)
   local formatted_fortune = M.format_fortune(fortune, options.max_width)
 
   return formatted_fortune

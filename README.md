@@ -59,7 +59,7 @@ footer = function()
 
 ```lua
 max_width = 60, -- max width the fortune section should take place
-display_format = 'short' | 'long'  -- the fortune form
+display_format = 'short' | 'long' | 'mixed'  -- the fortune form
 content_type = 'quotes' | 'tips'
 ```
 
