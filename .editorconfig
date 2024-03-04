@@ -18,5 +18,3 @@ indent_style = tab
 [*.js]
 indent_style = tab
 
-[{Makefile,**.mk}]
-indent_style = tab
