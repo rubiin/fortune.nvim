@@ -50,8 +50,8 @@ The plugin returns a lua table
 -- dashboard.nvim reference
 footer = function()
   local info = {}
-  local fortune = require('fortune').get_fortune()
-  info[1] = '  Neovim loaded ' .. vim.fn.strftime('%H:%M') .. ' on ' .. vim.fn.strftime('%d/%m/%Y') .. ' '
+  local fortune = require("fortune").get_fortune()
+  info[1] = "  Neovim loaded " .. vim.fn.strftime("%H:%M") .. " on " .. vim.fn.strftime("%d/%m/%Y") .. " '"
   local footer = vim.list_extend(info, fortune)
   return footer
   end
@@ -62,20 +62,20 @@ footer = function()
 
 ```lua
 max_width = 60, -- max width the fortune section should take place
-display_format = 'short' | 'long' | 'mixed'  -- the fortune form
-content_type = 'quotes' | 'tips'
+display_format = "short" | "long" | "mixed"  -- the fortune form
+content_type = "quotes" | "tips"
 ```
 
 ## Screenshots
 
 ### Tips
 
-When `content_type='tips'`, it shows some useful tips and tricks like neovim shortcuts which can be very useful.
+When `content_type="tips"`, it shows some useful tips and tricks like neovim shortcuts which can be very useful.
 
 ![1](https://i.imgur.com/f8CvAso.png)
 
 ### Quote
 
-When `content_type='quotes'`, it shows programming quotes that are both funny and educational.
+When `content_type="quotes"`, it shows programming quotes that are both funny and educational.
 
 ![2](https://i.imgur.com/Zi0Gr2n.png)
