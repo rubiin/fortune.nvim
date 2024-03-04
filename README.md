@@ -12,7 +12,7 @@ Check out the README for more details
 Using [packer](https://github.com/wbthomason/packer.nvim) in lua
 
 ```lua
-use {"rubiin/fortune.nvim", tag = '*'}
+use {"rubiin/fortune.nvim", tag = "*"}
 ```
 
 Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
@@ -20,26 +20,27 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
 ```lua
 {
    -- amongst your other plugins
-  {'rubiin/fortune.nvim', version = "*", config = true}
-
+  	{ "rubiin/fortune.nvim", version = "*", config = true },
   -- or
-  {
-    'rubiin/fortune.nvim', version = "*",
-    config = function()
-      require('fortune').setup {
-    max_width = 60, -- max width the fortune section should take place
-    display_format = 'short' | 'long' | 'mixed'  -- the fortune form
-    content_type = 'quotes' | 'tips'
-      }
-    end
-  }
+	{
+		"rubiin/fortune.nvim",
+		version = "*",
+		config = function()
+			require("fortune").setup({
+				max_width = 60, -- max width the fortune section should take place
+				display_format = "short" | "long" | "mixed", -- the fortune form
+				content_type = "quotes" | "tips",
+			})
+		end,
+	},
+
 }
 ```
 
 Using [vim-plug](https://github.com/junegunn/vim-plug) in vimscript
 
 ```vim
-Plug 'rubiin/fortune.nvim', {'tag' : '*'}
+Plug "rubiin/fortune.nvim", {"tag" : "*"}
 ```
 
 ## Usage
