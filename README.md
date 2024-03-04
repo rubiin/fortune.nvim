@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.imgur.com/wLMNwZq.png" height=200 /></p>
+<p align="center"><img src="https://i.imgur.com/wLMNwZq.png" height=130 /></p>
 
 ## Description
 
@@ -23,10 +23,13 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
   {'rubiin/fortune.nvim', version = "*", config = true}
 
   -- or
-  {'rubiin/fortune.nvim', version = "*",
+  {
+    'rubiin/fortune.nvim', version = "*",
     config = function()
       require('fortune').setup {
-        max_width = 60,
+    max_width = 60, -- max width the fortune section should take place
+    display_format = 'short' | 'long' | 'mixed'  -- the fortune form
+    content_type = 'quotes' | 'tips'
       }
     end
   }
