@@ -8,39 +8,39 @@ local M = {}
 --- @param max_width number
 --- @return table
 M.format_line = function(line, max_width)
-  if line == '' then
-    return { ' ' }
+  if line == "" then
+    return { " " }
   end
 
   local formatted_line = {}
 
   -- split line by spaces into list of words
   local words = {}
-  local target = '%S+'
+  local target = "%S+"
   for word in line:gmatch(target) do
     table.insert(words, word)
   end
 
-  local bufstart = ' '
+  local bufstart = " "
   local buffer = bufstart
   for i, word in ipairs(words) do
     if (#buffer + #word) <= max_width then
-      buffer = buffer .. word .. ' '
+      buffer = buffer .. word .. " "
       if i == #words then
         table.insert(formatted_line, buffer:sub(1, -2))
       end
     else
       table.insert(formatted_line, buffer:sub(1, -2))
-      buffer = bufstart .. word .. ' '
+      buffer = bufstart .. word .. " "
       if i == #words then
         table.insert(formatted_line, buffer:sub(1, -2))
       end
     end
   end
   -- right-justify text if the line begins with -
-  if line:sub(1, 1) == '-' then
+  if line:sub(1, 1) == "-" then
     for i, val in ipairs(formatted_line) do
-      local space = string.rep(' ', max_width - #val - 2)
+      local space = string.rep(" ", max_width - #val - 2)
       formatted_line[i] = space .. val:sub(2, -1)
     end
   end
@@ -52,7 +52,7 @@ end
 --- @return table
 M.format_fortune = function(fortune, max_width)
   -- Converts list of strings to one formatted string (with linebreaks)
-  local formatted_fortune = { ' ' } -- adds spacing between menu and footer
+  local formatted_fortune = { " " } -- adds spacing between menu and footer
   for _, line in ipairs(fortune) do
     local formatted_line = M.format_line(line, max_width)
     formatted_fortune = list_extend(formatted_fortune, formatted_line)
@@ -69,8 +69,8 @@ end
 
 local options = {
   max_width = 60,
-  display_format = 'short', -- 'short', 'long', ',mixed'
-  content_type = 'quotes', -- 'quotes' and 'tips'
+  display_format = "short", -- 'short', 'long', ',mixed'
+  content_type = "quotes", -- 'quotes' and 'tips'
 }
 
 --- Sets up the options for the module.
@@ -81,16 +81,16 @@ local options = {
 --- @return nil
 M.setup = function(opts)
   if opts ~= nil then
-    options = vim.tbl_extend('force', options, opts)
+    options = vim.tbl_extend("force", options, opts)
   end
 end
 
 --- @return table
 M.get_fortune = function()
-  local all_list = options.content_type == 'quotes' and require('fortune.quotes') or require('fortune.tips')
+  local all_list = options.content_type == "quotes" and require("fortune.quotes") or require("fortune.tips")
   local content
-  if options.display_format == 'mixed' then
-    content = vim.tbl_extend('force', {}, all_list['short'], all_list['long'])
+  if options.display_format == "mixed" then
+    content = vim.tbl_extend("force", {}, all_list["short"], all_list["long"])
   else
     content = all_list[options.display_format]
   end

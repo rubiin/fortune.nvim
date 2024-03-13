@@ -8,7 +8,8 @@
 	"diagnostics.disable": [
 		"different-requires",
 		"param-type-mismatch",
-		"assign-type-mismatch"
+		"assign-type-mismatch",
+        "no-unknown"
 	],
 	"diagnostics.globals": [
 		"vim",
