@@ -2,17 +2,16 @@
 
 ## Description
 
-Useful for dashboard plugins like mini.starter and dashboard.nvim
 This plugin designed to inject a dose of inspiration, wisdom, or humor into your editing workflow. It delivers random quotes, proverbs, or jokes directly to your Neovim dashboard. Additionally, it offers helpful tips and tricks to improve your productivity and efficiency within the editor.
 
-Check out the README for more details
+Useful for dashboard plugins like mini.starter and dashboard.nvim
 
 ## Installation
 
 Using [packer](https://github.com/wbthomason/packer.nvim) in lua
 
 ```lua
-use {"rubiin/fortune.nvim", tag = "*"}
+use {"rubiin/fortune.nvim"}
 ```
 
 Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
@@ -20,7 +19,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
 ```lua
 {
    -- amongst your other plugins
-  	{ "rubiin/fortune.nvim", version = "*", config = true },
+  	{ "rubiin/fortune.nvim", config = true },
   -- or
 	{
 		"rubiin/fortune.nvim",
@@ -40,7 +39,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
 Using [vim-plug](https://github.com/junegunn/vim-plug) in vimscript
 
 ```vim
-Plug "rubiin/fortune.nvim", {"tag" : "*"}
+Plug "rubiin/fortune.nvim"
 ```
 
 ## Usage
