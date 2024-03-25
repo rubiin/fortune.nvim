@@ -19,20 +19,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
 ```lua
 {
    -- amongst your other plugins
-  	{ "rubiin/fortune.nvim", config = true },
-  -- or
-	{
-		"rubiin/fortune.nvim",
-		version = "*",
-		config = function()
-			require("fortune").setup({
-				max_width = 60, -- max width the fortune section should take place
-				display_format = "short" | "long" | "mixed", -- the fortune form
-				content_type = "quotes" | "tips",
-			})
-		end,
-	},
-
+  	{ "rubiin/fortune.nvim", config = true }
 }
 ```
 
@@ -41,6 +28,29 @@ Using [vim-plug](https://github.com/junegunn/vim-plug) in vimscript
 ```vim
 Plug "rubiin/fortune.nvim"
 ```
+
+
+## Configuration (optional)
+Following options can be given when calling setup({config}). Below is the default configuration
+
+```lua
+{
+-- max width the fortune section should take place
+max_width = 60, 
+
+-- Controls the amout of text displayed
+-- short - One liners (default)
+-- long - Multiple lines
+-- mixed - Combination of above
+display_format = "short",
+
+-- The type of fortune to display
+-- quotes - Random techy quotes
+-- tips - Neovim productivity tips
+content_type = "quotes"
+}
+```
+
 
 ## Usage
 
@@ -56,14 +66,6 @@ footer = function()
   return footer
   end
 
-```
-
-## Configuration
-
-```lua
-max_width = 60, -- max width the fortune section should take place
-display_format = "short" | "long" | "mixed"  -- the fortune form
-content_type = "quotes" | "tips"
 ```
 
 ## Screenshots
