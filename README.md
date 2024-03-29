@@ -36,7 +36,7 @@ Following options can be given when calling setup({config}). Below is the defaul
 ```lua
 {
 -- max width the fortune section should take place
-max_width = 60, 
+max_width = 60,
 
 -- Controls the amout of text displayed
 -- short - One liners (default)
@@ -47,6 +47,7 @@ display_format = "short",
 -- The type of fortune to display
 -- quotes - Random techy quotes
 -- tips - Neovim productivity tips
+-- mixed - Combination of above
 content_type = "quotes"
 }
 ```
