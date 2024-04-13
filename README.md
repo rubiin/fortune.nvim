@@ -19,17 +19,15 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
 ```lua
 {
    -- amongst your other plugins
-  	{ "rubiin/fortune.nvim", config = true }
+{ "rubiin/fortune.nvim", config = true }
 }
-```
+``
 
 Using [vim-plug](https://github.com/junegunn/vim-plug) in vimscript
 
 ```vim
 Plug "rubiin/fortune.nvim"
 ```
-
-
 ## Configuration (optional)
 Following options can be given when calling setup({config}). Below is the default configuration
 
@@ -38,7 +36,7 @@ Following options can be given when calling setup({config}). Below is the defaul
 -- max width the fortune section should take place
 max_width = 60,
 
--- Controls the amout of text displayed
+-- Controls the amount of text displayed
 -- short - One liners (default)
 -- long - Multiple lines
 -- mixed - Combination of above
@@ -51,7 +49,6 @@ display_format = "short",
 content_type = "quotes"
 }
 ```
-
 
 ## Usage
 
@@ -82,3 +79,8 @@ When `content_type="tips"`, it shows some useful tips and tricks like neovim sho
 When `content_type="quotes"`, it shows programming quotes that are both funny and educational.
 
 ![2](https://i.imgur.com/Zi0Gr2n.png)
+
+## Self promotion
+Checkout my other plugins
+[highlighturl](https://github.com/rubiin/highlighturl.nvim)
+[vimwordlist](https://github.com/rubiin/vimwordlist.nvim)
