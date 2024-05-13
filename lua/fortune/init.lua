@@ -71,6 +71,8 @@ local options = {
   max_width = 60,
   display_format = "short", -- 'short', 'long', ',mixed'
   content_type = "quotes", -- 'quotes', 'tips', 'mixed'
+  custom_quotes = {},
+  custom_tips = {},
 }
 
 --- Sets up the options for the module.
@@ -78,6 +80,8 @@ local options = {
 --- max_width (number): The maximum width for content display.
 --- display_format (string): The format for displaying content. Can be 'short'.
 --- content_type (string): The type of content to display. Can be 'quotes' or 'tips'.
+--- custom_quotes (table): A table containing custom quotes to display. If set, replaces default quotes.
+--- custom_tips (table): A table containing custom tips to display. If set, replaces default tips.
 --- @return nil
 M.setup = function(opts)
   if opts ~= nil then
@@ -88,18 +92,23 @@ end
 --- @return table
 M.get_fortune = function()
   local all_list
+  local quotes = next(options.custom_quotes) and options.custom_quotes or require("fortune.quotes")
+  local tips = next(options.custom_tips) and options.custom_tips or require("fortune.tips")
+
   if options.content_type == "mixed" then
     local content_providers = {}
-    table.insert(content_providers, require("fortune.quotes"))
-    table.insert(content_providers, require("fortune.tips"))
-    all_list = {short = {}, long = {}}
-    for _, format in ipairs({"short", "long"}) do
+    table.insert(content_providers, quotes)
+    table.insert(content_providers, tips)
+    all_list = { short = {}, long = {} }
+    for _, format in ipairs({ "short", "long" }) do
       for _, content_provider in ipairs(content_providers) do
-        for _, v in pairs(content_provider[format]) do table.insert(all_list[format], v) end
+        for _, v in pairs(content_provider[format]) do
+          table.insert(all_list[format], v)
+        end
       end
     end
   else
-    all_list = options.content_type == "quotes" and require("fortune.quotes") or require("fortune.tips")
+    all_list = options.content_type == "quotes" and quotes or tips
   end
   local content
   if options.display_format == "mixed" then
