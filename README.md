@@ -18,10 +18,9 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
 
 ```lua
 {
-   -- amongst your other plugins
-{ "rubiin/fortune.nvim", config = true }
+"rubiin/fortune.nvim" 
 }
-``
+```
 
 Using [vim-plug](https://github.com/junegunn/vim-plug) in vimscript
 
