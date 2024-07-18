@@ -18,7 +18,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim) in lua
 
 ```lua
 {
-"rubiin/fortune.nvim" 
+"rubiin/fortune.nvim"
 }
 ```
 
@@ -27,7 +27,9 @@ Using [vim-plug](https://github.com/junegunn/vim-plug) in vimscript
 ```vim
 Plug "rubiin/fortune.nvim"
 ```
+
 ## Configuration (optional)
+
 Following options can be given when calling setup({config}). Below is the default configuration
 
 ```lua
@@ -45,7 +47,7 @@ display_format = "short",
 -- quotes - Random techy quotes
 -- tips - Neovim productivity tips
 -- mixed - Combination of above
-content_type = "quotes"
+content_type = "quotes",
 
 -- An optional object of custom quotes to replace the default ones like this:
 -- {
@@ -106,6 +108,7 @@ When `content_type="quotes"`, it shows programming quotes that are both funny an
 ![2](https://i.imgur.com/Zi0Gr2n.png)
 
 ## Self promotion
+
 Checkout my other plugins
 [highlighturl](https://github.com/rubiin/highlighturl.nvim)
 [vimwordlist](https://github.com/rubiin/vimwordlist.nvim)
