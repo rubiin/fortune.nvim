@@ -73,6 +73,7 @@ local options = {
   content_type = "quotes", -- 'quotes', 'tips', 'mixed'
   custom_quotes = {},
   custom_tips = {},
+  language = "en", -- default language
 }
 
 --- Sets up the options for the module.
@@ -92,8 +93,24 @@ end
 --- @return table
 M.get_fortune = function()
   local all_list
-  local quotes = next(options.custom_quotes) and options.custom_quotes or require("fortune.quotes")
-  local tips = next(options.custom_tips) and options.custom_tips or require("fortune.tips")
+  local quotes
+  local tips
+
+  local ok, lang_quotes = pcall(require, "fortune.lang." .. options.language .. ".quotes")
+  if ok then
+    quotes = next(options.custom_quotes) and options.custom_quotes or lang_quotes
+  else
+    -- Fallback to English if the specific language quotes are not found
+    quotes = next(options.custom_quotes) and options.custom_quotes or require("fortune.lang.en.quotes")
+  end
+
+  local ok_tips, lang_tips = pcall(require, "fortune.lang." .. options.language .. ".tips")
+  if ok_tips then
+    tips = next(options.custom_tips) and options.custom_tips or lang_tips
+  else
+    -- Fallback to English if the specific language tips are not found
+    tips = next(options.custom_tips) and options.custom_tips or require("fortune.lang.en.tips")
+  end
 
   if options.content_type == "mixed" then
     local content_providers = {}
