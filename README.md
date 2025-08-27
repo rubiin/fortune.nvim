@@ -74,6 +74,10 @@ custom_quotes = {},
 --     }
 -- }
 custom_tips = {},
+
+-- The language of the fortune content
+-- Default: "en"
+language = "en",
 }
 ```
 
