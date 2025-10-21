@@ -1,18 +1,25 @@
 repos:
   # ------------------------
-  # Lua formatting & linting
+  # Lua formatting
   # ------------------------
-  - repo: https://github.com/JohnnyMorganz/stylua
-    rev: v2.3.0  # Use latest stable version
+  - repo: local
     hooks:
       - id: stylua
-        files: \.lua$
-        args: ["--config-path", ".stylua.toml"]  # Optional: if you have a stylua config
+        name: Stylua Lua formatter
+        entry: stylua
+        language: system
+        types: [lua]
+        files: "\\.lua$"
+        args: ["--config-path", ".stylua.toml"]  # optional if you have a config
 
-  - repo: https://github.com/biomejs/pre-commit
-    rev: v2.2.5 # Use the sha / tag you want to point at
+  # ------------------------
+  # YAML & Markdown formatting
+  # ------------------------
+  - repo: local
     hooks:
-      - id: biome-check
+      - id: biome
         name: Biome code formatter
+        entry: biome format
+        language: system
         types: [yaml, markdown]
         files: "\\.(yaml|yml|md)$"
