@@ -1,172 +1,146 @@
-*goodies.nvim.txt*           For Neovim           Last change: 2025 October 21
+*fortune.nvim.txt*           For Neovim           Last change: 2025 October 21
 
 ==============================================================================
-Table of Contents                             *goodies.nvim-table-of-contents*
+Table of Contents                             *fortune.nvim-table-of-contents*
 
-1. goodies.nvim                                    |goodies.nvim-goodies.nvim|
-  - Overview                              |goodies.nvim-goodies.nvim-overview|
-  - Why?                                      |goodies.nvim-goodies.nvim-why?|
-  - Features                              |goodies.nvim-goodies.nvim-features|
-  - Suggested Keymaps            |goodies.nvim-goodies.nvim-suggested-keymaps|
-  - Installation                      |goodies.nvim-goodies.nvim-installation|
-  - Supported Filetypes (for Code Runner)|goodies.nvim-goodies.nvim-supported-filetypes-(for-code-runner)|
-  - Notes                                    |goodies.nvim-goodies.nvim-notes|
-  - ‍ Author                          |goodies.nvim-goodies.nvim-‍-author|
-  - License                                |goodies.nvim-goodies.nvim-license|
-2. Links                                                  |goodies.nvim-links|
+  - Description                                     |fortune.nvim-description|
+  - Installation                                   |fortune.nvim-installation|
+  - Configuration (optional)           |fortune.nvim-configuration-(optional)|
+  - Usage                                                 |fortune.nvim-usage|
+  - Screenshots                                     |fortune.nvim-screenshots|
+  - Self promotion                               |fortune.nvim-self-promotion|
+1. Links                                                  |fortune.nvim-links|
 
-==============================================================================
-1. goodies.nvim                                    *goodies.nvim-goodies.nvim*
+DESCRIPTION                                         *fortune.nvim-description*
 
+This plugin designed to inject a dose of inspiration, wisdom, or humor into
+your editing workflow. It delivers random quotes, proverbs, or jokes directly
+to your Neovim dashboard. Additionally, it offers helpful tips and tricks to
+improve your productivity and efficiency within the editor.
 
-  **Tiny, tasty, and too useful to leave in your config.** A small collection of
-  Lua utilities and commands for Neovim — not big enough for their own plugin,
-  but too handy to ignore.
-------------------------------------------------------------------------------
-
-OVERVIEW                                  *goodies.nvim-goodies.nvim-overview*
-
-This plugin bundles several lightweight but practical functions that improve
-everyday Neovim usage. Each function is **self-contained**, designed to be
-mapped to a keybinding, and focuses on **quality-of-life** enhancements —
-things that make editing faster, cleaner, or more delightful.
-
-Originally written by **Rubin Bhandari** <https://github.com/rubiin>.
-
-------------------------------------------------------------------------------
-
-WHY?                                          *goodies.nvim-goodies.nvim-why?*
-
-Your Neovim config can easily get cluttered with one-off helpers, commands, or
-scripts. `goodies.nvim` is the middle ground — a comfy home for those neat
-ideas that _don’t quite deserve_ their own repository.
-
-------------------------------------------------------------------------------
-
-FEATURES                                  *goodies.nvim-goodies.nvim-features*
+Useful for dashboard plugins like mini.starter and dashboard.nvim
 
 
-COMMENT UTILITIES ~
+INSTALLATION                                       *fortune.nvim-installation*
 
-- **M.comment_hr()**
-    Inserts a horizontal "commented" line that matches the file’s comment syntax and indentation.
-    Great for visually separating sections in your code or notes.
-
-
-CODE EXECUTION ~
-
-- **M.code_runner()** Detects the filetype and runs it using the appropriate
-    command (e.g. `python %`, `gcc %`, `node %`, etc.). Prompts you to choose
-    between multiple run modes (e.g., `default`, `debug`, `competitive`).
-- **M.run_file(ht)** Quick command to compile or execute the current file in a
-    terminal split (horizontal or vertical). Example: runs `cargo run` for Rust,
-    `python %` for Python, or `make` for C/C++.
-
-
-URL HELPERS ~
-
-- **M.open_url()** Opens the URL under the cursor in your system’s default
-    browser. Works with common formats like `https://example.com`.
-- **M.open_in_browser(url)** Utility function to open a specific URL using
-    `xdg-open`, `explorer`, `open`, or `wslview`.
-- **M.open_at_regex_101()** Detects and extracts regex patterns in supported
-    languages and opens them in **regex101.com** prefilled for quick testing.
-
-
-‍ AUTHOR METADATA ~
-
-- **M.add_author_details()** Inserts a standard comment header at the top of the
-    file, including:
-    - Author name
-    - Email
-    - GitHub
-    - Twitter
-    - Date (auto-generated)
-    Example:
-    >lua
-        require("goodies").add_author_details()
-    <
-    Produces:
-    >lua
-        -- Author: Rubin Bhandari <roobin.bhandari@gmail.com>
-        -- Date: 2024-05-23
-        -- GitHub: https://github.com/rubiin
-        -- Twitter: https://twitter.com/RubinCodes
-    <
-
-------------------------------------------------------------------------------
-
-SUGGESTED KEYMAPS                *goodies.nvim-goodies.nvim-suggested-keymaps*
-
-Add something like this to your `init.lua` or `keymaps.lua`:
+Using packer <https://github.com/wbthomason/packer.nvim> in lua
 
 >lua
-    local goodies = require("goodies")
-    
-    vim.keymap.set("n", "<leader>ch", goodies.comment_hr, { desc = "Insert comment HR" })
-    vim.keymap.set("n", "<leader>ru", goodies.code_runner, { desc = "Run current file" })
-    vim.keymap.set("n", "gx", goodies.open_url, { desc = "Open URL under cursor" })
-    vim.keymap.set("n", "<leader>yy",goodies.add_author_details, { desc = "Add author details" })
+    use {"rubiin/fortune.nvim"}
 <
 
-------------------------------------------------------------------------------
-
-INSTALLATION                          *goodies.nvim-goodies.nvim-installation*
-
-With **lazy.nvim**:
+Using lazy.nvim <https://github.com/folke/lazy.nvim> in lua
 
 >lua
     {
-      "rubiin/goodies.nvim",
-      opts = {
-        author = {
-            name = "John Doe",
-            email = "john.doe@example.com",
-            github = "johndoe",
-            twitter = "DoeTweets",
-        }
-      }
+    "rubiin/fortune.nvim"
     }
 <
 
-------------------------------------------------------------------------------
+Using vim-plug <https://github.com/junegunn/vim-plug> in vimscript
 
-SUPPORTED FILETYPES (FOR CODE RUNNER)*goodies.nvim-goodies.nvim-supported-filetypes-(for-code-runner)*
+>vim
+    Plug "rubiin/fortune.nvim"
+<
 
-- `c`, `cpp`, `cs`, `go`, `java`, `js`, `ts`, `py`, `rs`, `php`, `r`, `jl`, `rb`, `pl`, `html`
 
-Each filetype can have multiple run modes like `default`, `debug`, or
-`competitive`.
+CONFIGURATION (OPTIONAL)               *fortune.nvim-configuration-(optional)*
 
-------------------------------------------------------------------------------
+Following options can be given when calling setup({config}). Below is the
+default configuration
 
-NOTES                                        *goodies.nvim-goodies.nvim-notes*
+>lua
+    {
+    -- max width the fortune section should take place
+    max_width = 60,
+    
+    -- Controls the amount of text displayed
+    -- short - One liners (default)
+    -- long - Multiple lines
+    -- mixed - Combination of above
+    display_format = "short",
+    
+    -- The type of fortune to display
+    -- quotes - Random techy quotes
+    -- tips - Neovim productivity tips
+    -- mixed - Combination of above
+    content_type = "quotes",
+    
+    -- An optional object of custom quotes to replace the default ones like this:
+    -- {
+    --     short = {
+    --         { "This is a short quote", "- Author" },
+    --         { "This is another short quote", "- Author" },
+    --     },
+    --     long = {
+    --         { "This is a long quote", "- Author" },
+    --         { "This is another long quote", "- Author" },
+    --     }
+    -- }
+    custom_quotes = {},
+    
+    -- An optional object of custom tips to replace the default ones like this:
+    -- {
+    --     short = {
+    --         { "In normal mode, x will delete a single character" },
+    --         { "In visual mode, x will delete a range of characters" },
+    --     },
+    --     long = {
+    --         { "To delete from the current line to the end of the line, use d$" },
+    --         { "To delete from the current line to the beginning of the line, use d^" },
+    --     }
+    -- }
+    custom_tips = {},
+    
+    -- The language of the fortune content
+    -- Default: "en"
+    language = "en",
+    }
+<
 
-- All commands are written in **pure Lua**, no dependencies.
-- Every function is safe to keymap directly.
-- Designed to stay fast and clean — no global state, no side effects.
 
-------------------------------------------------------------------------------
+USAGE                                                     *fortune.nvim-usage*
 
-‍ AUTHOR                              *goodies.nvim-goodies.nvim-‍-author*
+The plugin returns a lua table
 
-**Rubin Bhandari**
+>lua
+    -- dashboard.nvim reference
+    footer = function()
+      local info = {}
+      local fortune = require("fortune").get_fortune()
+      info[1] = "  Neovim loaded " .. vim.fn.strftime("%H:%M") .. " on " .. vim.fn.strftime("%d/%m/%Y") .. " '"
+      local footer = vim.list_extend(info, fortune)
+      return footer
+      end
+<
 
-- roobin.bhandari@gmail.com <mailto:roobin.bhandari@gmail.com>
-- GitHub: @rubiin <https://github.com/rubiin>
-- Twitter: @RubinCodes <https://twitter.com/RubinCodes>
 
-------------------------------------------------------------------------------
+SCREENSHOTS                                         *fortune.nvim-screenshots*
 
-LICENSE                                    *goodies.nvim-goodies.nvim-license*
 
-MIT Rubin Bhandari
+TIPS ~
+
+When `content_type="tips"`, it shows some useful tips and tricks like neovim
+shortcuts which can be very useful.
+
+
+QUOTE ~
+
+When `content_type="quotes"`, it shows programming quotes that are both funny
+and educational.
+
+
+SELF PROMOTION                                   *fortune.nvim-self-promotion*
+
+Checkout my other plugins highlighturl
+<https://github.com/rubiin/highlighturl.nvim> vimwordlist
+<https://github.com/rubiin/vimwordlist.nvim>
 
 ==============================================================================
-2. Links                                                  *goodies.nvim-links*
+1. Links                                                  *fortune.nvim-links*
 
-1. *@rubiin*: 
-2. *@RubinCodes*: 
+1. *1*: https://i.imgur.com/f8CvAso.png
+2. *2*: https://i.imgur.com/Zi0Gr2n.png
 
 Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
 
