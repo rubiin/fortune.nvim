@@ -2,16 +2,21 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-
   release:
     name: release
-    if: ${{ github.ref == 'refs/heads/master' }}
+    # Run only if on master or main branch
+    if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
         with:
           release-type: simple
+          token: ${{ secrets.TOKEN_GITHUB }}
       - uses: actions/checkout@v4
       - name: tag stable versions
         if: ${{ steps.release.outputs.release_created }}
