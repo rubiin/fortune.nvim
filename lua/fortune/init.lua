@@ -4,6 +4,13 @@ local list_extend = vim.list_extend
 
 local M = {}
 
+--- seed RNG once at module load
+math.randomseed(os.time())
+local rnd = math.random
+
+-- cache loaded language modules to avoid repeated pcall/require overhead
+local language_cache = {}
+
 --- @param line string
 --- @param max_width number
 --- @return table
@@ -13,34 +20,26 @@ M.format_line = function(line, max_width)
   end
 
   local formatted_line = {}
-
-  -- split line by spaces into list of words
-  local words = {}
-  local target = "%S+"
-  for word in line:gmatch(target) do
-    table.insert(words, word)
-  end
-
   local bufstart = " "
   local buffer = bufstart
-  for i, word in ipairs(words) do
+  local word_count = 0
+  for word in line:gmatch("%S+") do
+    word_count = word_count + 1
     if (#buffer + #word) <= max_width then
       buffer = buffer .. word .. " "
-      if i == #words then
-        table.insert(formatted_line, buffer:sub(1, -2))
-      end
     else
       table.insert(formatted_line, buffer:sub(1, -2))
       buffer = bufstart .. word .. " "
-      if i == #words then
-        table.insert(formatted_line, buffer:sub(1, -2))
-      end
     end
+  end
+  if #buffer > #bufstart then
+    table.insert(formatted_line, buffer:sub(1, -2))
   end
   -- right-justify text if the line begins with -
   if line:sub(1, 1) == "-" then
+    local rep = string.rep
     for i, val in ipairs(formatted_line) do
-      local space = string.rep(" ", max_width - #val - 2)
+      local space = rep(" ", max_width - #val - 2)
       formatted_line[i] = space .. val:sub(2, -1)
     end
   end
@@ -55,15 +54,16 @@ M.format_fortune = function(fortune, max_width)
   local formatted_fortune = { " " } -- adds spacing between menu and footer
   for _, line in ipairs(fortune) do
     local formatted_line = M.format_line(line, max_width)
-    formatted_fortune = list_extend(formatted_fortune, formatted_line)
+    for i = 1, #formatted_line do
+      table.insert(formatted_fortune, formatted_line[i])
+    end
   end
   return formatted_fortune
 end
 
 -- selects an entry from fortune_list randomly
 local random_fortune = function(fortune_list)
-  math.randomseed(os.time())
-  local ind = math.random(1, #fortune_list)
+  local ind = rnd(1, #fortune_list)
   return fortune_list[ind]
 end
 
@@ -96,21 +96,20 @@ M.get_fortune = function()
   local quotes
   local tips
 
-  local ok, lang_quotes = pcall(require, "fortune.lang." .. options.language .. ".quotes")
-  if ok then
-    quotes = next(options.custom_quotes) and options.custom_quotes or lang_quotes
-  else
-    -- Fallback to English if the specific language quotes are not found
-    quotes = next(options.custom_quotes) and options.custom_quotes or require("fortune.lang.en.quotes")
+  -- load and cache language modules
+  local lang = options.language
+  local cached = language_cache[lang]
+  if not cached then
+    local ok_q, lang_quotes = pcall(require, "fortune.lang." .. lang .. ".quotes")
+    local ok_t, lang_tips = pcall(require, "fortune.lang." .. lang .. ".tips")
+    cached = {
+      quotes = ok_q and lang_quotes or require("fortune.lang.en.quotes"),
+      tips = ok_t and lang_tips or require("fortune.lang.en.tips"),
+    }
+    language_cache[lang] = cached
   end
-
-  local ok_tips, lang_tips = pcall(require, "fortune.lang." .. options.language .. ".tips")
-  if ok_tips then
-    tips = next(options.custom_tips) and options.custom_tips or lang_tips
-  else
-    -- Fallback to English if the specific language tips are not found
-    tips = next(options.custom_tips) and options.custom_tips or require("fortune.lang.en.tips")
-  end
+  quotes = next(options.custom_quotes) and options.custom_quotes or cached.quotes
+  tips = next(options.custom_tips) and options.custom_tips or cached.tips
 
   if options.content_type == "mixed" then
     local content_providers = {}
