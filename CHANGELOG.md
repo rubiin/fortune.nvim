@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/rubiin/fortune.nvim/compare/v1.7.0...v1.7.1) (2025-12-12)
+
+
+### Performance Improvements
+
+* seed RNG once, cache language modules, optimize formatting ([c4bedca](https://github.com/rubiin/fortune.nvim/commit/c4bedca54c852054cc5cfdb4b71f5f2d8b112b42))
+
 ## [1.7.0](https://github.com/rubiin/fortune.nvim/compare/v1.6.1...v1.7.0) (2025-08-27)
 
 
