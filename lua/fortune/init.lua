@@ -14,12 +14,16 @@ local language_cache = {}
 --- @param line string
 --- @param max_width number
 --- @return table
-M.format_line = function(line, max_width)
+M.format_line = function(line, max_width, min_width)
   if line == "" then
     return { " " }
   end
   local formatted_line = {}
   local maxw = max_width or 80
+  local minw = min_width or 0
+  if minw > maxw then
+    minw = maxw
+  end
 
   local buf = "" -- build without leading space, add one when inserting
   for word in line:gmatch("%S+") do
@@ -67,17 +71,29 @@ M.format_line = function(line, max_width)
     end
   end
 
+  -- enforce minimum width by padding end of content (excluding leading spaces)
+  if minw and minw > 0 then
+    for i, val in ipairs(formatted_line) do
+      local content = val:gsub("^%s+", "")
+      local need = minw - #content
+      if need > 0 then
+        formatted_line[i] = val .. string.rep(" ", need)
+      end
+    end
+  end
+
   return formatted_line
 end
 
 --- @param fortune table
 --- @param max_width number
+--- @param min_width number
 --- @return table
-M.format_fortune = function(fortune, max_width)
+M.format_fortune = function(fortune, max_width, min_width)
   -- Converts list of strings to one formatted string (with linebreaks)
   local formatted_fortune = { " " } -- adds spacing between menu and footer
   for _, line in ipairs(fortune) do
-    local formatted_line = M.format_line(line, max_width)
+    local formatted_line = M.format_line(line, max_width, min_width)
     for i = 1, #formatted_line do
       table.insert(formatted_fortune, formatted_line[i])
     end
@@ -93,6 +109,7 @@ end
 
 local options = {
   max_width = 60,
+  min_width = 0,
   display_format = "short", -- 'short', 'long', ',mixed'
   content_type = "quotes", -- 'quotes', 'tips', 'mixed'
   custom_quotes = {},
@@ -157,7 +174,7 @@ M.get_fortune = function()
     content = all_list[options.display_format]
   end
   local fortune = random_fortune(content)
-  local formatted_fortune = M.format_fortune(fortune, options.max_width)
+  local formatted_fortune = M.format_fortune(fortune, options.max_width, options.min_width)
 
   return formatted_fortune
 end
