@@ -18,31 +18,55 @@ M.format_line = function(line, max_width)
   if line == "" then
     return { " " }
   end
-
   local formatted_line = {}
-  local bufstart = " "
-  local buffer = bufstart
-  local word_count = 0
+  local maxw = max_width or 80
+
+  local buf = "" -- build without leading space, add one when inserting
   for word in line:gmatch("%S+") do
-    word_count = word_count + 1
-    if (#buffer + #word) <= max_width then
-      buffer = buffer .. word .. " "
+    -- if word itself longer than maxw, split the word
+    if #word > maxw then
+      if buf ~= "" then
+        table.insert(formatted_line, " " .. buf)
+        buf = ""
+      end
+      for i = 1, #word, maxw do
+        table.insert(formatted_line, " " .. word:sub(i, i + maxw - 1))
+      end
     else
-      table.insert(formatted_line, buffer:sub(1, -2))
-      buffer = bufstart .. word .. " "
+      if buf == "" then
+        buf = word
+      else
+        if #buf + 1 + #word <= maxw then
+          buf = buf .. " " .. word
+        else
+          table.insert(formatted_line, " " .. buf)
+          buf = word
+        end
+      end
     end
   end
-  if #buffer > #bufstart then
-    table.insert(formatted_line, buffer:sub(1, -2))
+  if buf ~= "" then
+    table.insert(formatted_line, " " .. buf)
   end
-  -- right-justify text if the line begins with -
+
+  -- right-justify text if the original line begins with '-'
   if line:sub(1, 1) == "-" then
-    local rep = string.rep
     for i, val in ipairs(formatted_line) do
-      local space = rep(" ", max_width - #val - 2)
-      formatted_line[i] = space .. val:sub(2, -1)
+      local content = val:gsub("^%s+", "")
+      if content:sub(1,1) == "-" then
+        content = content:sub(2)
+        if content:sub(1,1) == " " then
+          content = content:sub(2)
+        end
+      end
+      local pad = maxw - #content
+      if pad < 0 then
+        pad = 0
+      end
+      formatted_line[i] = string.rep(" ", pad) .. content
     end
   end
+
   return formatted_line
 end
 
