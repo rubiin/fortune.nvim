@@ -36,6 +36,9 @@ Following options can be given when calling setup({config}). Below is the defaul
 {
 -- max width the fortune section should take place
 max_width = 60,
+-- minimum width for each formatted line (pads short lines)
+-- Set to 0 to disable padding (default)
+min_width = 0,
 
 -- Controls the amount of text displayed
 -- short - One liners (default)
@@ -80,6 +83,33 @@ custom_tips = {},
 language = "en",
 }
 ```
+
+**Performance**
+
+- **What changed:** RNG is seeded once at module load, language modules are cached, and formatting was optimized to reduce temporary allocations.
+
+- **New option:** `min_width` (number) — pads each formatted line to at least this width when > 0.
+
+- **Local benchmark:** two helper scripts were added under `scripts/`:
+
+  - `scripts/bench.lua` — simple Lua micro-benchmark (requires `lua`/`luajit`).
+  - `scripts/bench_nvim.lua` — runs a headless Neovim benchmark for realistic timings.
+
+Run the Neovim benchmark (recommended):
+
+```bash
+nvim --headless -u NONE -c 'luafile scripts/bench_nvim.lua' -c qa
+```
+
+Or run the Lua micro-benchmark:
+
+```bash
+lua scripts/bench.lua
+# or
+luajit scripts/bench.lua
+```
+
+These commands print iterations, total seconds and average milliseconds per `get_fortune()` call.
 
 ## Usage
 
